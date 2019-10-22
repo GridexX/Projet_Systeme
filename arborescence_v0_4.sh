@@ -50,7 +50,8 @@ listeFD(){
     done
     echo "$listetxt :"
     cat $listetxt
-
+    #enregistre le fichier avec la liste des md5/dossiers dans le dossier logs
+    #ce fichier sera supprimer plus tard si analyse des dossiers
     nvfichier=$date"list_"$listetxt
     cp $listetxt ./$logdir/$nvfichier
     fichierBrut=./$logdir/$nvfichier
@@ -66,7 +67,7 @@ TriFD(){
     dir2=$5
     temp=`mktemp temp_XXX`
     
-    sort $fichier | cut -d\  -f1 >> $temp 
+    sort $fichier | cut -d' '  -f1 >> $temp 
     cat $temp > $fichier
 
     if [ -z "$dir2" ]
@@ -90,7 +91,8 @@ TriFD(){
 
     
     #fonction CP qui affiche le nombre de fichiers/dossiers différents
- 
+    echo "$fichier :"
+    cat $fichier
     nbligne=`cat $fichier | wc -l`
     debut=1
     while [ $debut -le $nbligne ] #tant qu'on a pas parcouru toutes les lignes du fichier
@@ -118,7 +120,8 @@ TriFD(){
     else
         arborescence="$dir1"
     fi
-    echo "Il y a $nbdiffer $mot différents sur $nbligne au total dans $arborescence" 
+
+    printf "Il y a $nbdiffer $mot différents sur $nbligne au total dans $arborescence\n" 
 
     rm $temp
 
@@ -128,11 +131,11 @@ TriFD(){
         then
             cheminCompletF $fichier $fichierBrut $temp $dir1 $dir2
         else
-            rm $fichier
+            rm $fichier #on supprime le fichier modifier dans le rep courant et on garde celui dans le log
         fi
     elif [ $type = "d" ] # si on analyse les dossiers on supprime les fichiers (CF consigne)
     then
-        rm $fichier $fichierBrut
+        rm $fichier $fichierBrut #on supprime tous les fichiers
     fi
 }
 
@@ -160,6 +163,6 @@ cheminCompletF(){
 checkParam
 listeFD f arbo1
 listeFD d arbo1
-listeFD f arbo2
-listeFD d arbo2
-listeFD f arbo1 arbo2
+#listeFD f arbo2
+#listeFD d arbo2
+#listeFD f arbo1 arbo2
