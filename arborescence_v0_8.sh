@@ -190,10 +190,11 @@ TriFD(){
     local nbFD=`cat $fichier | wc -l`
     cat $fichier | awk '{print $1}' | sort -u > $fichierTri
     local nbdiffFD=`cat $fichierTri | wc -l`
-
+    sort $fichier | cut -d' ' -f1 > $temp
+    
     # VARIABLE MD5 DE TOUS FICHIERS DIFFÉRENTS
     
-    tabMD5[$cpt]=`md5sum $fichierTri | cut -d' ' -f1` #stockage des md5 dans un tableau
+    tabMD5[$cpt]=`md5sum $temp | cut -d' ' -f1` #stockage des md5 dans un tableau
     if [ "$type" = "f" ]
     then
         ftemp=$fichierBrut
@@ -206,7 +207,7 @@ TriFD(){
     rm $temp
     if [ -z "$dir2" ]
     then
-        printf "\nIl y a \e[93m\e[1m$nbdiffFD $mot \e[0mdifférent sur \e[93m\e[1m$nbFD \e[0mau total dans \e[34m\e[1m$dir1\n\e[0mListe des \e[1m$mot \e[0mdifférents :\n\n"
+        printf "\nIl y a \e[93m\e[1m$nbdiffFD $mot \e[0mdifférents sur \e[93m\e[1m$nbFD \e[0mau total dans \e[34m\e[1m$dir1\n\e[0mListe des \e[1m$mot \e[0mdifférents :\n\n"
     fi
     nbDiff $fichier $fichierTri $dir1 $dir2
     
@@ -257,13 +258,14 @@ etatArbo(){
     local dir1=$1
     local dir2=$2
     #echo ${tabMD5[0]} ${tabMD5[1]} ${tabMD5[2]} ${tabMD5[3]}
-    
+    local state
     if [ "${tabMD5[0]}" = "${tabMD5[2]}" ] && [ "${tabMD5[1]}" = "${tabMD5[3]}" ]
     then
-        printf "\nLes deux arborescences \e[34m\e[1m$dir1 \e[0met \e[34m\e[1m$dir2 \e[0msont \e[1m\e[32mIDENTIQUES\e[0m\n"
+        state="\e[1m\e[32mIDENTIQUES\e[0m\n"
     else
-        printf "\nLes deux arborescences \e[34m\e[1m$dir1 \e[0met \e[34m\e[1m$dir2 \e[0sont \e[1m\e[31mDIFFERENTES\e[0m\n"
+        state="\e[1m\e[31mDIFFERENTES\e[0m\n"
     fi
+    printf "\nLes deux arborescences \e[34m\e[1m$dir1 \e[0met \e[34m\e[1m$dir2 \e[0msont $state"
 }
 
 
