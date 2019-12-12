@@ -10,9 +10,8 @@ checkParam(){
     fi
 
     html_file=./$logdir/$date"resultat.html"
-    template_temp=`mktemp HTML_TEMP_XXX`
     cp $template $html_file
-    cp $template $template_temp
+#    cp $template $template_temp
     
     #création d'un fichier pour supprimer les logs
     #A FAIRE
@@ -237,11 +236,11 @@ TriFD(){
         nbFD_html="%"$type"Tot3" #si ça correspond au deux rep
         nbDiff_html="%"$type"Diff3"
     fi
-    sed "s|$nbFD_html|$nbFD|g" $template_temp > $html_file
-    cat $html_file > $template_temp
+    sed -i "s|$nbFD_html|$nbFD|g" $html_file
+# cat $html_file > $template_temp
     
-    sed "s|$nbDiff_html|$nbdiffFD|g" $template_temp > $html_file
-    cat $html_file > $template_temp
+    sed -i "s|$nbDiff_html|$nbdiffFD|g" $html_file
+   # cat $html_file > $template_temp
     
     
         
@@ -311,7 +310,7 @@ nbDiff(){
             rm $fichierBrut
         fi
     else
-        if [ $cpt -lt 2 ]
+        if [ $cpt -le 2 ]
         then
             listFD_html=$listFD_html"1"
         else
@@ -320,8 +319,8 @@ nbDiff(){
         rm $fichierBrutCC
     fi
     echo $listFD_html
-    sed "s|$listFD_html|$listFD|g" $template_temp > $html_file
-    cat $html_file > $template_temp
+    sed -i "s|$listFD_html|$listFD|g" $html_file
+  #  cat $html_file > $template_temp
     
     rm $fichierTri $fichier $temp $temp2
     
@@ -333,29 +332,33 @@ etatArbo(){
     #echo ${tabMD5[0]} ${tabMD5[1]} ${tabMD5[2]} ${tabMD5[3]}
     local state
     local state_html
+    local html_color
     if [ "${tabMD5[0]}" = "${tabMD5[2]}" ] && [ "${tabMD5[1]}" = "${tabMD5[3]}" ]
     then
         state="\e[1m\e[32mIDENTIQUES\e[0m\n"
         state_html="IDENTIQUES"
+        html_color="green"
     else
         state="\e[1m\e[31mDIFFERENTES\e[0m\n"
         state_html="DIFFERENTES"
+        html_color="red"
     fi
     printf "\nLes deux arborescences \e[34m\e[1m$dir1 \e[0met \e[34m\e[1m$dir2 \e[0msont $state"
     
     #génération des dernières variables dans le template
     
-    sed "s|%etatArbo|$state_html|g" $template_temp > $html_file
-    cat $html_file > $template_temp
-    sed "s|%dir1|$dir1|g" $template_temp > $html_file
-    cat $html_file > $template_temp
-    sed "s|%dir2|$dir2|g" $template_temp > $html_file
-    cat $html_file > $template_temp
-    
-    rm $template_temp
+    sed -i "s|%etatArbo|$state_html|g" $html_file
+  #  cat $html_file > $template_temp
+    sed -i "s|%dir1|$dir1|g" $html_file
+  #  cat $html_file > $template_temp
+    sed -i "s|%dir2|$dir2|g" $html_file
+  #  cat $html_file > $template_temp
+    sed -i "s|%clrEtat|$html_color|g" $html_file
+    #ouverture page html généré
+    xdg-open ./$logdir/$htmlfile
 }
 
-template="template.html"
+template="./html/template.html"
 date=`date +%Y%m%d_%H%M%S_`
 cpt=0
 
