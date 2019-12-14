@@ -8,10 +8,10 @@ Pour lancer le script il faut se trouver dans le répertoire où il est stocké 
 'bash ./comparaison.sh'
 Le script peut prendre en paramètres les 2 arborescences à comparer.
 Si aucun paramètres n'est fournit, le programme les demande à l'utilisateur
-Un test sur les dossiers existant est ensuite fait pour vérifier si :*
-*les arborescences existent dans le répertoire courant*
-*l'utilisateur à les droits en lecture*
-*l'utilsateur n'a pas entré un nom de fichier
+Un test sur les dossiers existant est ensuite fait pour vérifier si :
+* les arborescences existent dans le répertoire courant
+* l'utilisateur à les droits en lecture
+* l'utilsateur n'a pas entré un nom de fichier
 
 
 Explications des bonus
