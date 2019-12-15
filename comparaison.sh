@@ -366,9 +366,9 @@ etatArbo(){
 
     #ouverture de la page html générée
     #Selon la version de linux la commande peut-être xdg-open / dg-open / open 
-    #open ./$logdir/$htmlfile
-    #dg-open ./$logdir/$htmlfile
-    xdg-open ./$logdir/$htmlfile
+    #open ./$html_file
+    #dg-open ./$html_file
+    xdg-open ./$html_file
 }
 
 template="./html/template.html"
