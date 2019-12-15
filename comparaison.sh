@@ -166,7 +166,7 @@ TriFD(){
         mot="dossiers"
         rm $fichierBrut
 
-        #Shéma du fonctionnement du programme
+        #Schéma du fonctionnement du programme
         
         #Supposons l'arbo suivant :
         #arbo1/
@@ -310,7 +310,7 @@ nbDiff(){
     cat $fichierBrutCC
     
     local listFD_html="%list"$type
-    #remplace les \n par <br> pour le html
+    #remplace les \n par <br> pour le HTML
     sed ':a;N;$!ba;s/\n/<br>/g' $fichierBrutCC > $temp
     local listFD=`cat $temp`
     if [ -n "$dir2" ]
@@ -366,8 +366,8 @@ etatArbo(){
 
     #ouverture de la page html générée
     #Selon la version de linux la commande peut-être xdg-open / dg-open / open 
-    #open ./$html_file
-    #dg-open ./$html_file
+    # open ./$html_file
+    # dg-open ./$html_file
     xdg-open ./$html_file
 }
 
