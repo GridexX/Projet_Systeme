@@ -8,7 +8,7 @@ Pour lancer le script il faut se trouver dans le répertoire où il est stocké 
 `bash ./comparaison.sh`
 Le script peut prendre en paramètres les 2 arborescences à comparer. Si aucun paramètres n'est fournit, le programme les demande à l'utilisateur. Un test sur les dossiers existant est ensuite fait pour vérifier si :
 * les arborescences existent dans le répertoire courant
-* l'utilisateur à les droits en lecture
+* l'utilisateur a les droits en lecture
 * l'utilsateur n'a pas entré un nom de fichier
 
 
@@ -17,7 +17,7 @@ Le script peut prendre en paramètres les 2 arborescences à comparer. Si aucun 
 
 **1. Horodate et logs**
 
-   Un effort à été fait pour avoir des noms de fichier facilement triable :
+   Un effort a été fait pour avoir des noms de fichier facilement triable :
 * Les fichiers sont horodatés au format `aaaammjj_hhmmss_`
 * Les fichiers *.txt* sont au format `horodatage_<operation>_<type>_<arborescence>.txt`
 * Les fichiers *.html* sont au format `horodatage_resulat.html`
@@ -28,9 +28,9 @@ De plus le fichier `REMOVELOGS.sh` permet de les supprimer facilement en spécif
 **2. Page web**
 
 Une page web est générée à chaque fin de programme.
-Pour celà un template à été crée et à chaque exécution est copié puis renommé dans le dossier logs.
+Pour celà un template a été crée et à chaque exécution est copié puis renommé dans le dossier logs.
 Si ce dernier ne s'ouvre pas en fin de programme, vous pouvez modifier la commande ligne 371 par une en commentaire.
-La page web à été réalisée à l'aide du framework *Bootstrap* pour avoir un design responsive. De plus un choix esthétique à été fait sur les couleurs : le fond des card des fichiers est en bleu/violet et celui des dossiers est en mauve/orange afin de faire visuellement la différence entre les deux. Des modal ont également été utilisés afin d'afficher la liste des fichiers/dossiers.
+La page web a été réalisée à l'aide du framework *Bootstrap* pour avoir un design responsive. De plus un choix esthétique a été fait sur les couleurs : le fond des card des fichiers est en bleu/violet et celui des dossiers est en mauve/orange afin de faire visuellement la différence entre les deux. Des modal ont également été utilisés afin d'afficher la liste des fichiers/dossiers.
 
 
 
